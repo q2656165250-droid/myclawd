@@ -661,6 +661,34 @@
     </div>
 
     <script>
+        // 从 daily-data.json 加载数据
+        let newsData = [];
+        let githubData = [];
+        let zodiacData = [];
+
+        async function loadDailyData() {
+            try {
+                const response = await fetch('daily/daily-data.json');
+                const data = await response.json();
+                newsData = data.news || [];
+                githubData = data.githubTrending || [];
+                zodiacData = data.zodiac || [];
+                
+                // 数据加载后渲染
+                renderNewsList();
+                renderGithubList();
+                renderZodiacCards();
+                updateUpdateTime();
+            } catch (error) {
+                console.error('加载数据失败:', error);
+                // 使用默认数据
+                newsData = [
+                    { title: "数据加载中...", tag: "系统", time: "刚刚", summary: "正在获取最新数据，请稍后..." }
+                ];
+                renderNewsList();
+            }
+        }
+
         // 每日励志语录
         const quotes = [
             "✨ 每一天都是新的开始，愿今天的你充满能量！",
@@ -877,16 +905,13 @@
         }
 
         // 页面加载
-        window.addEventListener('load', function() {
+        window.addEventListener('load', async function() {
             setTimeout(function() {
                 document.getElementById('loading').classList.add('hidden');
             }, 800);
 
             createStars();
-            renderNewsList();
-            renderGithubList();
-            renderZodiacCards();
-            updateUpdateTime();
+            await loadDailyData();
             updateVisitorCount();
             initLike();
             getNewQuote();
