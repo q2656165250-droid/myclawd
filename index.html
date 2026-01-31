@@ -10,14 +10,81 @@
             padding: 0;
             box-sizing: border-box;
         }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(102, 126, 234, 0); }
+        }
+
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             min-height: 100vh;
             padding: 20px;
         }
+
         .container {
             max-width: 900px;
             margin: 0 auto;
@@ -25,47 +92,134 @@
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
         }
+
         header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 60px 40px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: rotate 60s linear infinite;
+        }
+
         header h1 {
             font-size: 3em;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            animation: fadeInUp 1s ease-out;
         }
+
+        header .sparkles {
+            animation: bounce 2s infinite;
+        }
+
         header p {
             font-size: 1.2em;
             opacity: 0.9;
+            position: relative;
+            animation: fadeInUp 1s ease-out 0.3s both;
         }
+
         .content {
             padding: 40px;
         }
+
         .post {
             margin-bottom: 40px;
             border-bottom: 1px solid #eee;
             padding-bottom: 30px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: slideInLeft 0.6s ease-out forwards;
         }
+
+        .post:nth-child(1) { animation-delay: 0.2s; }
+        .post:nth-child(2) { animation-delay: 0.4s; }
+        .post:nth-child(3) { animation-delay: 0.6s; }
+        .post:nth-child(4) { animation-delay: 0.8s; }
+        .post:nth-child(5) { animation-delay: 1.0s; }
+
+        .post:hover {
+            transform: translateX(10px);
+            border-bottom-color: #667eea;
+        }
+
         .post:last-child {
             border-bottom: none;
         }
+
         .post h2 {
             color: #667eea;
             font-size: 1.8em;
             margin-bottom: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
         }
+
+        .post:hover h2 {
+            color: #764ba2;
+            transform: scale(1.05);
+        }
+
+        .post h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .post:hover h2::after {
+            width: 100%;
+        }
+
         .post .date {
             color: #999;
             font-size: 0.9em;
             margin-bottom: 15px;
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 5px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
         }
+
+        .post:hover .date {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+
         .post p {
             margin-bottom: 15px;
             text-align: justify;
+            transition: all 0.3s ease;
         }
+
+        .post:hover p {
+            color: #444;
+        }
+
         .quote {
             background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
             padding: 20px;
@@ -73,28 +227,174 @@
             margin: 20px 0;
             font-style: italic;
             border-radius: 0 10px 10px 0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
+
+        .quote::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            font-size: 4em;
+            color: rgba(102, 126, 234, 0.2);
+            line-height: 1;
+        }
+
+        .quote:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+            animation: pulse 2s infinite;
+        }
+
         footer {
             text-align: center;
             padding: 30px;
-            background: #f8f9fa;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             color: #666;
+            position: relative;
+            overflow: hidden;
         }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #667eea, #764ba2, transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s linear infinite;
+        }
+
         .emoji {
             font-size: 2em;
             margin: 5px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .emoji:hover {
+            animation: bounce 0.5s ease;
+            transform: scale(1.3);
+        }
+
+        .emoji {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .emoji:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        /* 滚动时显示动画 */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 加载动画 */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: rotate 1s linear infinite;
+        }
+
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 鼠标跟随效果 */
+        .cursor-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            transition: opacity 0.3s ease;
         }
     </style>
 </head>
 <body>
+    <!-- 加载动画 -->
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+    </div>
+
+    <!-- 鼠标跟随效果 -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" id="backToTop">↑</button>
+
     <div class="container">
         <header>
-            <h1>✨ 美好生活 ✨</h1>
+            <h1 class="sparkles">✨ 美好生活 ✨</h1>
             <p>记录每一个值得珍藏的瞬间</p>
         </header>
 
         <div class="content">
-            <div class="post">
+            <div class="post reveal">
                 <h2>☀️ 清晨的第一缕阳光</h2>
                 <p class="date">2026年1月31日</p>
                 <p>清晨六点半，闹钟还没响，窗外的光就已经悄悄爬上了我的床沿。揉揉眼睛，看到金色的阳光穿过窗帘的缝隙，在地板上画出一道温暖的光带。</p>
@@ -102,7 +402,7 @@
                 <div class="quote">"生活不是等待风暴过去，而是学会在雨中跳舞。"</div>
             </div>
 
-            <div class="post">
+            <div class="post reveal">
                 <h2>☕ 一杯咖啡的仪式感</h2>
                 <p class="date">2026年1月30日</p>
                 <p>手冲咖啡是一件很有仪式感的事。磨豆时的香气，水温的把控，水流缓缓注入咖啡粉时的咕嘟声，每一步都让人沉静下来。</p>
@@ -110,7 +410,7 @@
                 <span class="emoji">☕</span><span class="emoji">🌿</span>
             </div>
 
-            <div class="post">
+            <div class="post reveal">
                 <h2>🌅 黄昏的治愈时刻</h2>
                 <p class="date">2026年1月29日</p>
                 <p>傍晚时分，天空被染成了温柔的粉紫色。云朵像被点燃了一样，边缘镶着金边。我站在阳台上，看着太阳慢慢沉入地平线。</p>
@@ -118,7 +418,7 @@
                 <div class="quote">"最美的风景，往往在最不经意的瞬间出现。"</div>
             </div>
 
-            <div class="post">
+            <div class="post reveal">
                 <h2>📚 与书的独处时光</h2>
                 <p class="date">2026年1月28日</p>
                 <p>周末的午后，一个人窝在沙发里，一杯茶，一本书。外面的喧嚣与我无关，我沉浸在另一个世界里。</p>
@@ -126,7 +426,7 @@
                 <span class="emoji">📖</span><span class="emoji">🍵</span>
             </div>
 
-            <div class="post">
+            <div class="post reveal">
                 <h2>👨‍👩‍👧 与家人在一起</h2>
                 <p class="date">2026年1月27日</p>
                 <p>忙碌了一周，最期待的莫过于和家人一起吃饭。妈妈做的菜，爸爸讲的故事，孩子的笑声，这些都是无价之宝。</p>
@@ -140,5 +440,65 @@
             <p style="margin-top: 10px; font-size: 0.9em;">© 2026 美好生活博客</p>
         </footer>
     </div>
+
+    <script>
+        // 页面加载完成后隐藏加载动画
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loading').classList.add('hidden');
+            }, 500);
+        });
+
+        // 滚动显示动画
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            const windowHeight = window.innerHeight;
+
+            reveals.forEach(reveal => {
+                const revealTop = reveal.getBoundingClientRect().top;
+                const revealPoint = 150;
+
+                if (revealTop < windowHeight - revealPoint) {
+                    reveal.classList.add('active');
+                }
+            });
+
+            // 返回顶部按钮
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // 初始化
+
+        // 返回顶部
+        document.getElementById('backToTop').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 鼠标跟随效果
+        const cursorGlow = document.getElementById('cursorGlow');
+        document.addEventListener('mousemove', function(e) {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+
+        // Emoji 点击效果
+        document.querySelectorAll('.emoji').forEach(emoji => {
+            emoji.addEventListener('click', function() {
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = 'bounce 0.5s ease';
+                }, 10);
+            });
+        });
+    </script>
 </body>
 </html>
