@@ -170,20 +170,20 @@ function generatePodcast(date) {
     const podcasts = [
         {
             icon: '🎙️',
-            title: '科技前沿播客',
-            desc: '每周更新，解读最新科技趋势，深入分析AI、芯片、新能源等领域。',
+            title: '科技前沿',
+            desc: '每周更新，深入分析AI、芯片、新能源、生物科技等前沿领域。特邀行业专家访谈，技术发展趋势预测。',
             url: 'https://example.com/podcast1',
-            author: 'Alex',
+            author: '科技观察',
             duration: '45分钟',
             episodes: 128,
-            cover: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=400&h=400&fit=crop'
+            cover: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=400&fit=crop'
         },
         {
             icon: '🎧',
             title: '游戏风云',
-            desc: '专注游戏行业资讯，热门游戏评测，玩家社区讨论。',
+            desc: '热门游戏评测，独立游戏推荐，玩家社区讨论。游戏行业动态，开发者访谈，电竞赛事分析。',
             url: 'https://example.com/podcast2',
-            author: 'Alex',
+            author: '游戏玩家',
             duration: '60分钟',
             episodes: 256,
             cover: 'https://images.unsplash.com/photo-1552820728-8b83bb6b2b0e?w=400&h=400&fit=crop'
@@ -191,12 +191,42 @@ function generatePodcast(date) {
         {
             icon: '📻',
             title: '生活百态',
-            desc: '分享生活感悟，人生哲理，让每一天都更有意义。',
+            desc: '每日生活感悟，人生哲理分享，心灵成长故事。职场建议，人际关系，心理健康，让每一天更有意义。',
             url: 'https://example.com/podcast3',
-            author: 'Alex',
+            author: '生活家',
             duration: '30分钟',
             episodes: 64,
             cover: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=400&h=400&fit=crop'
+        },
+        {
+            icon: '🎵',
+            title: '音乐漫步',
+            desc: '从古典到流行，从民谣到电子，探索音乐的世界。乐队故事，专辑推荐，音乐人访谈，音乐背后的故事。',
+            url: 'https://example.com/podcast4',
+            author: '音乐探索者',
+            duration: '50分钟',
+            episodes: 89,
+            cover: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop'
+        },
+        {
+            icon: '🌍',
+            title: '旅行日记',
+            desc: '世界各地的旅行故事，文化探索，美食推荐。独行侠分享，情侣旅行，亲子游，不同视角看世界。',
+            url: 'https://example.com/podcast5',
+            author: '旅行家',
+            duration: '40分钟',
+            episodes: 156,
+            cover: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=400&fit=crop'
+        },
+        {
+            icon: '🎬',
+            title: '影视评论',
+            desc: '电影、电视剧、动漫、纪录片评论。导演风格分析，演员访谈，影视行业动态，经典重映。',
+            url: 'https://example.com/podcast6',
+            author: '影评人',
+            duration: '55分钟',
+            episodes: 203,
+            cover: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&h=400&fit=crop'
         }
     ];
     return podcasts;
