@@ -1,14 +1,7 @@
-#!/usr/bin/env node
-
-/**
- * 每日博客自动更新脚本（带图片版本）
- * 功能：更新星座运势、新闻、GitHub项目、播客，包含图片
- */
-
 const fs = require('fs');
 const path = require('path');
 
-// 星座运势生成器（基于日期伪随机，保持同一天运势一致）
+// 生成星座运势数据
 function generateZodiacFortune(date) {
     const zodiacNames = ['白羊座', '金牛座', '双子座', '巨蟹座', '狮子座', '处女座',
                         '天秤座', '天蝎座', '射手座', '摩羯座', '水瓶座', '双鱼座'];
@@ -17,7 +10,7 @@ function generateZodiacFortune(date) {
                          '8/23-9/22', '9/23-10/23', '10/24-11/22', '11/23-12/21',
                          '12/22-1/19', '1/20-2/18', '2/19-3/20'];
     
-    // 星座图片 URL（使用 Unsplash 图片）
+    // 星座图片 URL（使用占位符，实际可以替换为真实星座图片）
     const zodiacImages = [
         'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400&h=300&fit=crop', // 白羊
         'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop', // 金牛
@@ -73,12 +66,13 @@ function generateZodiacFortune(date) {
     return zodiacData;
 }
 
-// 模拟新闻数据（带图片）
+// 生成新闻数据（带图片）
 function generateNews(date) {
     const newsTemplates = [
         {
             title: '全球科技发展迎来新突破，AI应用场景持续扩展',
             tag: '科技',
+            time: '1小时前',
             summary: '最新研究显示，人工智能技术在医疗、教育等领域的应用取得显著进展，为行业发展注入新动力。',
             source: '科技日报',
             url: 'https://example.com',
@@ -87,6 +81,7 @@ function generateNews(date) {
         {
             title: '绿色能源产业蓬勃发展，可持续发展理念深入人心',
             tag: '环保',
+            time: '2小时前',
             summary: '随着环保意识提升，新能源产业持续增长，多个项目投入建设，推动绿色转型。',
             source: '环保新闻网',
             url: 'https://example.com',
@@ -95,6 +90,7 @@ function generateNews(date) {
         {
             title: '太空探索取得新进展，国际合作助力人类探索宇宙',
             tag: '航天',
+            time: '3小时前',
             summary: '各国航天合作不断深化，新的探索计划陆续启动，人类对宇宙的认知持续加深。',
             source: '航天科技报',
             url: 'https://example.com',
@@ -103,6 +99,7 @@ function generateNews(date) {
         {
             title: '数字经济蓬勃发展，新业态新模式不断涌现',
             tag: '经济',
+            time: '4小时前',
             summary: '数字化转型加速推进，新商业模式层出不穷，为经济增长提供新动能。',
             source: '经济日报',
             url: 'https://example.com',
@@ -111,6 +108,7 @@ function generateNews(date) {
         {
             title: '文化产业创新发展，优秀传统文化焕发新活力',
             tag: '文化',
+            time: '5小时前',
             summary: '传统文化与现代科技深度融合，新表达形式让文化传播更加生动有趣。',
             source: '文化周刊',
             url: 'https://example.com',
@@ -119,6 +117,7 @@ function generateNews(date) {
         {
             title: '健康生活理念普及，全民健身运动持续升温',
             tag: '健康',
+            time: '6小时前',
             summary: '越来越多的人关注身心健康，科学健身方法得到广泛推广和应用。',
             source: '健康时报',
             url: 'https://example.com',
@@ -202,20 +201,20 @@ function generatePodcast(date) {
     return podcasts;
 }
 
-// 更新index.html中的数据
-function updateBlogData(dateStr) {
-    const indexPath = path.join(__dirname, 'index.html');
-    let content = fs.readFileSync(indexPath, 'utf8');
+// 更新博客 HTML 文件
+function updateBlogHTML(date) {
+    const htmlPath = path.join(__dirname, 'index.html');
+    let html = fs.readFileSync(htmlPath, 'utf8');
 
     // 生成新数据
-    const zodiacData = generateZodiacFortune(dateStr);
-    const newsData = generateNews(dateStr);
-    const githubData = generateGithubTrending(dateStr);
-    const podcastData = generatePodcast(dateStr);
+    const zodiacData = generateZodiacFortune(date);
+    const newsData = generateNews(date);
+    const githubData = generateGithubTrending(date);
+    const podcastData = generatePodcast(date);
 
     // 更新 dailyData 对象
     const dailyData = {
-        updateDate: dateStr,
+        updateDate: date,
         news: newsData,
         githubTrending: githubData,
         zodiac: zodiacData,
@@ -225,38 +224,31 @@ function updateBlogData(dateStr) {
     const dailyDataStr = JSON.stringify(dailyData, null, 8);
 
     // 替换 dailyData
-    content = content.replace(
+    html = html.replace(
         /const dailyData = \{[\s\S]*?\};[\s\n\r]*\/\/ === 每日数据结束/,
         `const dailyData = ${dailyDataStr};\n        // === 每日数据结束`
     );
 
-    // 更新时间显示
-    const dateObj = new Date();
-    const formattedDateStr = dateObj.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
-    content = content.replace(
-        /更新时间：<span id="updateTime">.*?<\/span>/,
-        `更新时间：<span id="updateTime">${formattedDateStr}</span>`
-    );
-
-    fs.writeFileSync(indexPath, content, 'utf8');
-    console.log(`✅ 博客数据已更新：${dateStr}`);
-    console.log(`📊 星座运势：${zodiacData.length} 个星座`);
-    console.log(`📰 新闻资讯：${newsData.length} 条`);
-    console.log(`🔥 GitHub 项目：${githubData.length} 个`);
-    console.log(`🎙️ 播客频道：${podcastData.length} 个`);
+    // 写回文件
+    fs.writeFileSync(htmlPath, html, 'utf8');
+    console.log('✅ 博客数据已更新');
+    console.log(`📅 日期: ${date}`);
+    console.log(`📰 新闻: ${newsData.length} 条`);
+    console.log(`🔥 GitHub 项目: ${githubData.length} 个`);
+    console.log(`⭐ 星座: ${zodiacData.length} 个`);
+    console.log(`🎙️ 播客: ${podcastData.length} 个`);
 }
 
 // 主函数
 function main() {
-    const today = new Date().toISOString().split('T')[0];
-    console.log(`🚀 开始更新博客数据...`);
-    updateBlogData(today);
-    console.log(`✨ 更新完成！`);
+    const date = process.argv[2] || new Date().toISOString().split('T')[0];
+    console.log('🚀 开始更新博客数据...');
+    updateBlogHTML(date);
+    console.log('✅ 博客数据更新完成！');
 }
 
-// 如果直接运行此脚本
 if (require.main === module) {
     main();
 }
 
-module.exports = { generateZodiacFortune, generateNews, generateGithubTrending, generatePodcast, updateBlogData };
+module.exports = { generateZodiacFortune, generateNews, generateGithubTrending, generatePodcast };
