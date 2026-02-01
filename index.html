@@ -1423,17 +1423,18 @@
             const grids = document.querySelectorAll('.zodiac-grid');
             grids.forEach(grid => {
                 grid.innerHTML = '';
-            dailyData.zodiac.forEach((zodiac, index) => {
-                const card = document.createElement('div');
-                card.className = 'zodiac-card-small';
-                card.style.backgroundImage = 'linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9)), url(' + zodiac.image + ')';
-                card.style.backgroundSize = 'cover';
-                card.style.backgroundPosition = 'center';
-                card.innerHTML = '<div class="zodiac-icon-small">' + zodiac.icon + '</div><div class="zodiac-name-small">' + zodiac.name + '</div><div class="zodiac-date-small">' + zodiac.date + '</div><div class="zodiac-luck-small"><span class="luck-stars-small">' + generateLuckStars(zodiac.luck) + '</span></div><div class="zodiac-desc-small">' + zodiac.desc + '</div>';
-                card.addEventListener('click', function() {
-                    openZodiacModal(zodiac);
+                dailyData.zodiac.forEach((zodiac, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'zodiac-card-small';
+                    card.style.backgroundImage = 'linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9)), url(' + zodiac.image + ')';
+                    card.style.backgroundSize = 'cover';
+                    card.style.backgroundPosition = 'center';
+                    card.innerHTML = '<div class="zodiac-icon-small">' + zodiac.icon + '</div><div class="zodiac-name-small">' + zodiac.name + '</div><div class="zodiac-date-small">' + zodiac.date + '</div><div class="zodiac-luck-small"><span class="luck-stars-small">' + generateLuckStars(zodiac.luck) + '</span></div><div class="zodiac-desc-small">' + zodiac.desc + '</div>';
+                    card.addEventListener('click', function() {
+                        openZodiacModal(zodiac);
+                    });
+                    grid.appendChild(card);
                 });
-                grid.appendChild(card);
             });
         }
 
@@ -1466,21 +1467,22 @@
             const lists = document.querySelectorAll('.news-list');
             lists.forEach(list => {
                 list.innerHTML = '';
-            dailyData.news.forEach((news, index) => {
-                const item = document.createElement('div');
-                item.className = 'news-item';
-                item.style.opacity = '0';
-                item.style.transform = 'translateX(-50px)';
-                item.style.transition = 'all 0.5s ease';
-                item.innerHTML = '<div class="news-image-wrapper"><img src="' + news.image + '" alt="' + news.title + '" class="news-image" /></div><div class="news-content"><div class="news-title">' + news.title + '</div><div class="news-meta"><span class="news-tag">' + news.tag + '</span><span>' + news.time + '</span></div><div class="news-summary">' + news.summary + '</div><div class="news-source">🔗 来源: ' + news.source + ' （点击查看详情）</div></div>';
-                item.addEventListener('click', function() {
-                    window.open(news.url, '_blank');
+                dailyData.news.forEach((news, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'news-item';
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateX(-50px)';
+                    item.style.transition = 'all 0.5s ease';
+                    item.innerHTML = '<div class="news-image-wrapper"><img src="' + news.image + '" alt="' + news.title + '" class="news-image" /></div><div class="news-content"><div class="news-title">' + news.title + '</div><div class="news-meta"><span class="news-tag">' + news.tag + '</span><span>' + news.time + '</span></div><div class="news-summary">' + news.summary + '</div><div class="news-source">🔗 来源: ' + news.source + ' （点击查看详情）</div></div>';
+                    item.addEventListener('click', function() {
+                        window.open(news.url, '_blank');
+                    });
+                    list.appendChild(item);
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateX(0)';
+                    }, 300 + index * 100);
                 });
-                list.appendChild(item);
-                setTimeout(() => {
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateX(0)';
-                }, 300 + index * 100);
             });
         }
 
@@ -1489,21 +1491,22 @@
             const lists = document.querySelectorAll('.podcast-list');
             lists.forEach(list => {
                 list.innerHTML = '';
-            dailyData.podcast.forEach((pod, index) => {
-                const card = document.createElement('div');
-                card.className = 'podcast-card';
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-                card.style.transition = 'all 0.5s ease';
-                card.innerHTML = '<div class="podcast-cover-wrapper"><img src="' + pod.cover + '" alt="' + pod.title + '" class="podcast-cover" /><div class="podcast-play-icon">▶</div></div><div class="podcast-info"><div class="podcast-title">' + pod.title + '</div><div class="podcast-desc">' + pod.desc + '</div><div class="podcast-meta"><span>👤 ' + pod.author + '</span><span>⏱️ ' + pod.duration + '</span><span>📊 ' + pod.episodes + '期</span></div></div>';
-                card.addEventListener('click', function() {
-                    window.open(pod.url, '_blank');
+                dailyData.podcast.forEach((pod, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'podcast-card';
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(30px)';
+                    card.style.transition = 'all 0.5s ease';
+                    card.innerHTML = '<div class="podcast-cover-wrapper"><img src="' + pod.cover + '" alt="' + pod.title + '" class="podcast-cover" /><div class="podcast-play-icon">▶</div></div><div class="podcast-info"><div class="podcast-title">' + pod.title + '</div><div class="podcast-desc">' + pod.desc + '</div><div class="podcast-meta"><span>👤 ' + pod.author + '</span><span>⏱️ ' + pod.duration + '</span><span>📊 ' + pod.episodes + '期</span></div></div>';
+                    card.addEventListener('click', function() {
+                        window.open(pod.url, '_blank');
+                    });
+                    list.appendChild(card);
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 600 + index * 150);
                 });
-                list.appendChild(card);
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 600 + index * 150);
             });
         }
 
@@ -1512,21 +1515,22 @@
             const lists = document.querySelectorAll('.github-grid');
             lists.forEach(list => {
                 list.innerHTML = '';
-            dailyData.githubTrending.forEach((repo, index) => {
-                const card = document.createElement('div');
-                card.className = 'github-card';
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-                card.style.transition = 'all 0.5s ease';
-                card.innerHTML = '<div class="github-image-wrapper"><img src="' + repo.image + '" alt="' + repo.name + '" class="github-image" /></div><div class="github-name">' + repo.name + '</div><div class="github-desc">' + repo.description + '</div><div class="github-meta"><div class="github-stars">⭐ ' + repo.stars + '</div><div class="github-lang"><span>' + repo.language + '</span></div></div>';
-                card.addEventListener('click', function() {
-                    window.open(repo.url, '_blank');
+                dailyData.githubTrending.forEach((repo, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'github-card';
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(30px)';
+                    card.style.transition = 'all 0.5s ease';
+                    card.innerHTML = '<div class="github-image-wrapper"><img src="' + repo.image + '" alt="' + repo.name + '" class="github-image" /></div><div class="github-name">' + repo.name + '</div><div class="github-desc">' + repo.description + '</div><div class="github-meta"><div class="github-stars">⭐ ' + repo.stars + '</div><div class="github-lang"><span>' + repo.language + '</span></div></div>';
+                    card.addEventListener('click', function() {
+                        window.open(repo.url, '_blank');
+                    });
+                    list.appendChild(card);
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 500 + index * 150);
                 });
-                list.appendChild(card);
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 500 + index * 150);
             });
         }
 
