@@ -947,38 +947,27 @@
             <div class="news-list" id="newsList"></div>
         </section>
 
-        <section class="section">
-            <h2 class="section-title"><span class="icon">🎙️</span> 播客频道</h2>
-            <div class="podcast-list" id="podcastList"></div>
-        </section>
-
-        <section class="section">
-            <h2 class="section-title"><span class="icon">⭐</span> 12星座今日运势</h2>
-            <div class="zodiac-grid" id="zodiacGrid"></div>
-        </section>
-
         
         <div class="tab-content" id="zodiac-tab">
             <section class="section">
                 <h2 class="section-title"><span class="icon">⭐</span> 12星座今日运势</h2>
-                <div class="zodiac-grid" id="zodiacGrid"></div>
+                <div class="zodiac-grid" id="zodiacGridFull"></div>
             </section>
         </div>
-
+        
         <div class="tab-content" id="podcast-tab">
             <section class="section">
                 <h2 class="section-title"><span class="icon">🎙️</span> 播客频道</h2>
-                <div class="podcast-list" id="podcastList"></div>
+                <div class="podcast-list" id="podcastListFull"></div>
             </section>
         </div>
-
+        
         <div class="tab-content" id="github-tab">
             <section class="section">
                 <h2 class="section-title"><span class="icon">🔥</span> GitHub 热门项目 TOP 3</h2>
-                <div class="github-grid" id="githubList"></div>
+                <div class="github-grid" id="githubListFull"></div>
             </section>
         </div>
-
         <div class="tab-content" id="about-tab">
             <div class="about-section">
                 <div class="about-card">
@@ -1113,56 +1102,56 @@
                 {
                         "title": "全球科技发展迎来新突破，AI应用场景持续扩展",
                         "tag": "科技",
-                        "time": "1小时前",
                         "summary": "最新研究显示，人工智能技术在医疗、教育等领域的应用取得显著进展，为行业发展注入新动力。",
                         "source": "科技日报",
                         "url": "https://example.com",
-                        "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop"
+                        "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop",
+                        "time": "1小时前"
                 },
                 {
                         "title": "绿色能源产业蓬勃发展，可持续发展理念深入人心",
                         "tag": "环保",
-                        "time": "2小时前",
                         "summary": "随着环保意识提升，新能源产业持续增长，多个项目投入建设，推动绿色转型。",
                         "source": "环保新闻网",
                         "url": "https://example.com",
-                        "image": "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&h=400&fit=crop"
+                        "image": "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&h=400&fit=crop",
+                        "time": "2小时前"
                 },
                 {
                         "title": "太空探索取得新进展，国际合作助力人类探索宇宙",
                         "tag": "航天",
-                        "time": "3小时前",
                         "summary": "各国航天合作不断深化，新的探索计划陆续启动，人类对宇宙的认知持续加深。",
                         "source": "航天科技报",
                         "url": "https://example.com",
-                        "image": "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&h=400&fit=crop"
+                        "image": "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&h=400&fit=crop",
+                        "time": "3小时前"
                 },
                 {
                         "title": "数字经济蓬勃发展，新业态新模式不断涌现",
                         "tag": "经济",
-                        "time": "4小时前",
                         "summary": "数字化转型加速推进，新商业模式层出不穷，为经济增长提供新动能。",
                         "source": "经济日报",
                         "url": "https://example.com",
-                        "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=400&fit=crop"
+                        "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=400&fit=crop",
+                        "time": "4小时前"
                 },
                 {
                         "title": "文化产业创新发展，优秀传统文化焕发新活力",
                         "tag": "文化",
-                        "time": "5小时前",
                         "summary": "传统文化与现代科技深度融合，新表达形式让文化传播更加生动有趣。",
                         "source": "文化周刊",
                         "url": "https://example.com",
-                        "image": "https://images.unsplash.com/photo-1461360370896-922624d12a74?w=800&h=400&fit=crop"
+                        "image": "https://images.unsplash.com/photo-1461360370896-922624d12a74?w=800&h=400&fit=crop",
+                        "time": "5小时前"
                 },
                 {
                         "title": "健康生活理念普及，全民健身运动持续升温",
                         "tag": "健康",
-                        "time": "6小时前",
                         "summary": "越来越多的人关注身心健康，科学健身方法得到广泛推广和应用。",
                         "source": "健康时报",
                         "url": "https://example.com",
-                        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=400&fit=crop"
+                        "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=400&fit=crop",
+                        "time": "6小时前"
                 }
         ],
         "githubTrending": [
@@ -1431,7 +1420,9 @@
 
         // 渲染星座卡片
         function renderZodiacCards() {
-            const grid = document.getElementById('zodiacGrid');
+            const grids = document.querySelectorAll('.zodiac-grid');
+            grids.forEach(grid => {
+                grid.innerHTML = '';
             dailyData.zodiac.forEach((zodiac, index) => {
                 const card = document.createElement('div');
                 card.className = 'zodiac-card-small';
@@ -1472,7 +1463,9 @@
 
         // 渲染新闻列表
         function renderNewsList() {
-            const list = document.getElementById('newsList');
+            const lists = document.querySelectorAll('.news-list');
+            lists.forEach(list => {
+                list.innerHTML = '';
             dailyData.news.forEach((news, index) => {
                 const item = document.createElement('div');
                 item.className = 'news-item';
@@ -1493,7 +1486,9 @@
 
         // 渲染播客列表
         function renderPodcastList() {
-            const list = document.getElementById('podcastList');
+            const lists = document.querySelectorAll('.podcast-list');
+            lists.forEach(list => {
+                list.innerHTML = '';
             dailyData.podcast.forEach((pod, index) => {
                 const card = document.createElement('div');
                 card.className = 'podcast-card';
@@ -1514,7 +1509,9 @@
 
         // 渲染 GitHub 项目
         function renderGithubList() {
-            const list = document.getElementById('githubList');
+            const lists = document.querySelectorAll('.github-grid');
+            lists.forEach(list => {
+                list.innerHTML = '';
             dailyData.githubTrending.forEach((repo, index) => {
                 const card = document.createElement('div');
                 card.className = 'github-card';
@@ -1642,9 +1639,13 @@
 
             createStars();
             initTabNavigation();
+            
+            // 渲染所有内容
             renderNewsList();
             renderGithubList();
             renderZodiacCards();
+            renderPodcastList();
+            
             updateUpdateTime();
             updateVisitorCount();
             initLike();
