@@ -245,11 +245,21 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .news-item:hover {
             transform: translateX(10px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            border-left-width: 6px;
+        }
+
+        .news-source {
+            font-size: 0.85em;
+            color: #667eea;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #eee;
         }
 
         .news-item:nth-child(1) { border-left-color: #667eea; }
@@ -283,6 +293,81 @@
         .news-summary {
             color: #555;
             line-height: 1.6;
+        }
+
+        .news-source {
+            font-size: 0.85em;
+            color: #667eea;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #eee;
+        }
+
+        .podcast-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .podcast-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .podcast-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .podcast-card:nth-child(1) { border-left-color: #667eea; }
+        .podcast-card:nth-child(2) { border-left-color: #f093fb; }
+        .podcast-card:nth-child(3) { border-left-color: #4facfe; }
+
+        .podcast-icon {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .podcast-title {
+            font-size: 1.2em;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .podcast-desc {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .podcast-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8em;
+            color: #888;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+
+        .podcast-link {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .podcast-link:hover {
+            text-decoration: underline;
         }
 
         .zodiac-grid {
@@ -605,6 +690,11 @@
         </section>
 
         <section class="section">
+            <h2 class="section-title"><span class="icon">🎙️</span> 播客频道</h2>
+            <div class="podcast-list" id="podcastList"></div>
+        </section>
+
+        <section class="section">
             <h2 class="section-title"><span class="icon">⭐</span> 12星座今日运势</h2>
             <div class="zodiac-grid" id="zodiacGrid"></div>
         </section>
@@ -665,12 +755,12 @@
         const dailyData = {
         updateDate: "2026-02-01",
         news: [
-            { "title": "方舟飞升最新更新：Astraeos扩展包新增Pyranthos沙漠地图", "tag": "游戏", "time": "今天", "summary": "ARK: Survival Ascended（方舟飞升）发布最新更新，2月25日Astraeos扩展包将新增Pyranthos沙漠地图。该地图充满了古代遗迹和多头巨型怪物挑战。游戏售价$60，支持Windows平台。", "source": "Steam" },
-            { "title": "2026年芯片新进展：3nm芯片量产良率大幅提升", "tag": "芯片", "time": "1小时前", "summary": "最新报道显示，芯片领域取得重要进展，值得关注。3nm芯片量产良率大幅提升的消息引起行业广泛关注。", "source": "IT之家" },
-            { "title": "2026年虚拟现实新进展：元宇宙经济规模突破万亿", "tag": "虚拟现实", "time": "2小时前", "summary": "最新报道显示，虚拟现实领域取得重要进展，值得关注。元宇宙经济规模突破万亿的消息引起行业广泛关注。", "source": "科技日报" },
-            { "title": "2026年AI新进展：生成式AI在创意产业的应用案例", "tag": "AI", "time": "3小时前", "summary": "最新报道显示，AI领域取得重要进展，值得关注。生成式AI在创意产业的应用案例的消息引起行业广泛关注。", "source": "极客公园" },
-            { "title": "2026年航天新进展：火星探测器发现液态水证据", "tag": "航天", "time": "5小时前", "summary": "最新报道显示，航天领域取得重要进展，值得关注。火星探测器发现液态水证据的消息引起行业广泛关注。", "source": "36氪" },
-            { "title": "2026年新能源新进展：固态电池技术取得重大突破", "tag": "新能源", "time": "8小时前", "summary": "最新报道显示，新能源领域取得重要进展，值得关注。固态电池技术取得重大突破的消息引起行业广泛关注。", "source": "36氪" }
+            { "title": "方舟飞升最新更新：Astraeos扩展包新增Pyranthos沙漠地图", "tag": "游戏", "time": "今天", "summary": "ARK: Survival Ascended（方舟飞升）发布最新更新，2月25日Astraeos扩展包将新增Pyranthos沙漠地图。该地图充满了古代遗迹和多头巨型怪物挑战。游戏售价$60，支持Windows平台。", "source": "Steam", "url": "https://store.steampowered.com/app/2399830/" },
+            { "title": "2026年芯片新进展：3nm芯片量产良率大幅提升", "tag": "芯片", "time": "1小时前", "summary": "最新报道显示，芯片领域取得重要进展，值得关注。3nm芯片量产良率大幅提升的消息引起行业广泛关注。", "source": "IT之家", "url": "https://www.ithome.com/" },
+            { "title": "2026年虚拟现实新进展：元宇宙经济规模突破万亿", "tag": "虚拟现实", "time": "2小时前", "summary": "最新报道显示，虚拟现实领域取得重要进展，值得关注。元宇宙经济规模突破万亿的消息引起行业广泛关注。", "source": "科技日报", "url": "https://www.stdaily.com/" },
+            { "title": "2026年AI新进展：生成式AI在创意产业的应用案例", "tag": "AI", "time": "3小时前", "summary": "最新报道显示，AI领域取得重要进展，值得关注。生成式AI在创意产业的应用案例的消息引起行业广泛关注。", "source": "极客公园", "url": "https://www.geekpark.net/" },
+            { "title": "2026年航天新进展：火星探测器发现液态水证据", "tag": "航天", "time": "5小时前", "summary": "最新报道显示，航天领域取得重要进展，值得关注。火星探测器发现液态水证据的消息引起行业广泛关注。", "source": "36氪", "url": "https://36kr.com/" },
+            { "title": "2026年新能源新进展：固态电池技术取得重大突破", "tag": "新能源", "time": "8小时前", "summary": "最新报道显示，新能源领域取得重要进展，值得关注。固态电池技术取得重大突破的消息引起行业广泛关注。", "source": "36氪", "url": "https://36kr.com/" }
         ],
         githubTrending: [
             { "name": "golang/go", "description": "The Go programming language", "stars": "120k", "language": "Go", "url": "https://github.com/golang/go" },
@@ -690,6 +780,11 @@
             { "icon": "♑", "name": "摩羯座", "date": "12/22-1/19", "luck": 5, "love": 4, "career": 2, "wealth": 4, "desc": "自由意志强烈，适合规划未来。旅行运不错，可以考虑短途出行放松心情。" },
             { "icon": "♒", "name": "水瓶座", "date": "1/20-2/18", "luck": 5, "love": 5, "career": 2, "wealth": 4, "desc": "工作运稳定，但需要耐心。健康方面注意颈椎保护，适当运动。" },
             { "icon": "♓", "name": "双鱼座", "date": "2/19-3/20", "luck": 4, "love": 5, "career": 5, "wealth": 4, "desc": "自由意志强烈，适合规划未来。旅行运不错，可以考虑短途出行放松心情。" }
+        ],
+        podcast: [
+            { "icon": "🎙️", "title": "科技前沿播客", "desc": "每周更新，解读最新科技趋势，深入分析AI、芯片、新能源等领域。", "url": "https://example.com/podcast1", "author": "Alex", "duration": "45分钟", "episodes": 128 },
+            { "icon": "🎧", "title": "游戏风云", "desc": "专注游戏行业资讯，热门游戏评测，玩家社区讨论。", "url": "https://example.com/podcast2", "author": "Alex", "duration": "60分钟", "episodes": 256 },
+            { "icon": "📻", "title": "生活百态", "desc": "分享生活感悟，人生哲理，让每一天都更有意义。", "url": "https://example.com/podcast3", "author": "Alex", "duration": "30分钟", "episodes": 64 }
         ]
         };
         // === 每日数据结束 (由Python脚本自动更新) === (由Python脚本自动更新) ===
@@ -795,12 +890,46 @@
                         <span>${news.time}</span>
                     </div>
                     <div class="news-summary">${news.summary}</div>
+                    <div class="news-source">🔗 来源: ${news.source} （点击查看详情）</div>
                 `;
+                item.addEventListener('click', function() {
+                    window.open(news.url, '_blank');
+                });
                 list.appendChild(item);
                 setTimeout(() => {
                     item.style.opacity = '1';
                     item.style.transform = 'translateX(0)';
                 }, 300 + index * 100);
+            });
+        }
+
+        // 渲染播客列表
+        function renderPodcastList() {
+            const list = document.getElementById('podcastList');
+            dailyData.podcast.forEach((pod, index) => {
+                const card = document.createElement('div');
+                card.className = 'podcast-card';
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.5s ease';
+                card.innerHTML = `
+                    <div class="podcast-icon">${pod.icon}</div>
+                    <div class="podcast-title">${pod.title}</div>
+                    <div class="podcast-desc">${pod.desc}</div>
+                    <div class="podcast-meta">
+                        <span>👤 ${pod.author}</span>
+                        <span>⏱️ ${pod.duration}</span>
+                        <span>📊 ${pod.episodes}期</span>
+                    </div>
+                `;
+                card.addEventListener('click', function() {
+                    window.open(pod.url, '_blank');
+                });
+                list.appendChild(card);
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 600 + index * 150);
             });
         }
 
