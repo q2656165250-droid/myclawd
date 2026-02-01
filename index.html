@@ -905,6 +905,155 @@
             margin-bottom: 5px;
         }
 
+    
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                border-radius: 0;
+            }
+            
+            header {
+                padding: 30px 20px;
+            }
+            
+            header h1 {
+                font-size: 1.5em;
+            }
+            
+            .section {
+                padding: 20px 15px;
+            }
+            
+            .section-title {
+                font-size: 1.3em;
+            }
+            
+            /* Tab 导航 */
+            .tab-nav {
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .tab-item {
+                padding: 12px 15px;
+                font-size: 0.85em;
+                white-space: nowrap;
+            }
+            
+            /* 新闻卡片 */
+            .news-item {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .news-image-wrapper {
+                width: 100%;
+                height: 180px;
+            }
+            
+            .news-title {
+                font-size: 1.1em;
+            }
+            
+            /* 播客卡片 */
+            .podcast-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .podcast-cover-wrapper {
+                width: 100%;
+                height: auto;
+                max-width: 200px;
+            }
+            
+            /* GitHub 卡片 */
+            .github-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            /* 星座卡片 */
+            .zodiac-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .zodiac-card-small {
+                padding: 15px;
+            }
+            
+            .zodiac-icon-small {
+                font-size: 1.5em;
+            }
+            
+            .zodiac-name-small {
+                font-size: 0.9em;
+            }
+            
+            .zodiac-desc-small {
+                font-size: 0.75em;
+                display: none;
+            }
+            
+            /* 关于页面 */
+            .about-card {
+                padding: 20px 15px;
+            }
+            
+            .about-title {
+                font-size: 1.3em;
+            }
+            
+            .about-content {
+                font-size: 0.9em;
+            }
+            
+            /* Footer */
+            .footer {
+                padding: 20px;
+            }
+            
+            .footer-btn {
+                padding: 8px 15px;
+                font-size: 0.85em;
+            }
+            
+            /* 返回顶部按钮 */
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+        
+        /* 小屏手机 */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.3em;
+            }
+            
+            .section-title {
+                font-size: 1.1em;
+            }
+            
+            .zodiac-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab-item {
+                padding: 10px 12px;
+                font-size: 0.8em;
+            }
+        }
+
     </style>
 </head>
 <body>
