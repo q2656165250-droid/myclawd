@@ -1253,6 +1253,10 @@
                 <h2 class="section-title"><span class="icon">🔥</span> GitHub 热门项目 TOP 3</h2>
                 <div class="github-grid" id="githubListFull"></div>
             </section>
+            <section class="section">
+                <h2 class="section-title"><span class="icon">⭐</span> 最近三天最多人点赞的项目</h2>
+                <div class="github-grid" id="githubPopularList"></div>
+            </section>
         </div>
         <div class="tab-content" id="about-tab">
             <div class="about-section">
@@ -1819,6 +1823,57 @@
                 });
             });
         }
+        
+        // 渲染 GitHub 热门项目 (最近三天最多点赞)
+        function renderGithubPopularList() {
+            // 这里需要从 API 获取最近三天最多点赞的项目
+            // 暂时使用模拟数据
+            const popularProjects = [
+                {
+                    name: "microsoft/vscode",
+                    description: "Visual Studio Code is a code editor redefined and optimized for building and debugging modern web and cloud applications.",
+                    stars: "150k",
+                    language: "TypeScript",
+                    url: "https://github.com/microsoft/vscode",
+                    image: "https://github.com/microsoft/vscode/raw/main/resources/linux/code.png"
+                },
+                {
+                    name: "freeCodeCamp/freeCodeCamp",
+                    description: "freeCodeCamp.org's open-source codebase and curriculum. Learn to code for free.",
+                    stars: "380k",
+                    language: "JavaScript",
+                    url: "https://github.com/freeCodeCamp/freeCodeCamp",
+                    image: "https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg"
+                },
+                {
+                    name: "vercel/next.js",
+                    description: "The React Framework - 用于构建全栈 Web 应用的 React 框架",
+                    stars: "125k",
+                    language: "JavaScript",
+                    url: "https://github.com/vercel/next.js",
+                    image: "https://assets.vercel.com/image/upload/front/assets/design/nextjs-black-logo.svg"
+                }
+            ];
+            
+            const list = document.getElementById('githubPopularList');
+            list.innerHTML = '';
+            popularProjects.forEach((repo, index) => {
+                const card = document.createElement('div');
+                card.className = 'github-card';
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.5s ease';
+                card.innerHTML = '<div class="github-image-wrapper"><img src="' + repo.image + '" alt="' + repo.name + '" class="github-image" /></div><div class="github-name">' + repo.name + '</div><div class="github-desc">' + repo.description + '</div><div class="github-meta"><div class="github-stars">⭐ ' + repo.stars + '</div><div class="github-lang"><span>' + repo.language + '</span></div></div>';
+                card.addEventListener('click', function() {
+                    window.open(repo.url, '_blank');
+                });
+                list.appendChild(card);
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 500 + index * 150);
+            });
+        }
 
         // 更新时间
         function updateUpdateTime() {
@@ -1933,6 +1988,7 @@
             // 渲染所有内容
             renderNewsList();
             renderGithubList();
+            renderGithubPopularList();
             renderZodiacCards();
             renderPodcastList();
             
