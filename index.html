@@ -1828,8 +1828,8 @@
         async function renderGithubPopularList() {
             try {
                 // 从 GitHub API 获取最近三天最多点赞的项目
-                // 使用 pushed 参数来查找最近活跃的仓库
-                const response = await fetch('https://api.github.com/search/repositories?q=pushed:>2026-01-30&sort=stars&order=desc', {
+                // 查询最近热门的仓库
+                const response = await fetch('https://api.github.com/search/repositories?q=stars:>1000+created:>2026-01-30&sort=stars&order=desc', {
                     headers: {
                         'Accept': 'application/vnd.github.v3+json'
                     }
